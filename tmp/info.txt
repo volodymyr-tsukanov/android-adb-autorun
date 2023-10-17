@@ -1,0 +1,14 @@
+First run:
+ connect usb
+ * adb tcpip [port]
+ * adb connect [ip]:[port]
+ disconnect usb
+
+Screenshot: * adb shell screencap /sdcard/Android/img1.png
+Screen record: * adb shell screenrecord -p /sdcard/vid1.mp4
+
+Copy files from device: * adb pull [target path] [save path] ( adb pull /sdcard/Android/img1.png tmp/files/ )
+Copy files to device: * adb push  [source] [target]
+Delete file: * adb shell rm -f [path to file] ( adb shell rm -f /sdcard/Android/img1.png )
+
+Battery: * adb shell dumpsys battery
