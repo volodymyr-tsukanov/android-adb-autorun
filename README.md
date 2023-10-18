@@ -1,6 +1,6 @@
 # android-adb-autorun
 Batch; Android; ADB platform tools</br>
-Install ADB platform tools and put <b>autorun_adb.bat</b> next to <i>adb.exe</i>
+Install ADB platform tools and put <b>autorun_adb.bat</b> next to <i>adb.exe</i></br></br>
 
 
 Shield: [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
