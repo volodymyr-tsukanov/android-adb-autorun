@@ -23,13 +23,13 @@ if [%vd%]==[] set "vd=http://www.youtube.com/"
 set /p "msg=Enter messsage: "
 if [%msg%]==[] set "msg=Hello!"
 :end_sett
-echo Done! && cls && echo %help% && adb devices
+echo Done! && echo %help% && adb devices
 goto save
 
 
 :st
 set /p "inp=Enter mode: "
-set "r=%RANDOM%"
+set "r=%RANDOM%" & set "wd=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%" & set "hg=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%"
 
 if %inp%==000 goto save
 
@@ -51,7 +51,7 @@ if %inp%==12 echo Disconnecting %cur_ip%... && adb disconnect %cur_ip%:%cur_port
 
 if %inp%==13 echo Disconnecting all... && adb disconnect && goto st
 
-if %inp%==14 echo Changing %cur_ip%:%cur_port% port to %new_port%... && set /p "t=Enter any letter to confirm new port: " && adb -s %cur_ip% tcpip %new_port% && adb disconnect %cur_ip%:%cur_port% && adb connect %cur_ip%:%new_port% && set "cur_port=%new_port%" && goto save
+if %inp%==14 echo Changing %cur_ip%:%cur_port% port to %new_port%... && set /p "t=Enter any letter to confirm new port: " && adb -s %cur_ip% tcpip %new_port% && adb disconnect %cur_ip%:%cur_port% && adb connect %cur_ip%:%new_port% && set "cur_port=%new_port%" && set "new_port=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%" && goto save
 
 if %inp%==14.2 echo Updating new port... && set "new_port=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%" && goto st
 
@@ -93,7 +93,7 @@ if %inp%==57 echo Mute && adb -s %cur_ip%:%cur_port% shell input keyevent 25 && 
 
 if %inp%==58 echo Pause && adb -s %cur_ip%:%cur_port% shell input keyevent 85 && goto st
 
-if %inp%==59 echo Crazy input starting... && adb -s %cur_ip%:%cur_port% shell input tap 525 1100 && adb -s %cur_ip%:%cur_port% shell input tap 585 1000 && adb -s %cur_ip%:%cur_port% shell input tap 825 800 && adb -s %cur_ip%:%cur_port% shell input tap 125 1550 && goto st
+if %inp%==59 echo Crazy input starting... && adb -s %cur_ip%:%cur_port% shell input tap 525 1100 && adb -s %cur_ip%:%cur_port% shell input tap 585 1000 && adb -s %cur_ip%:%cur_port% shell input tap 825 800 && adb -s %cur_ip%:%cur_port% shell input tap 125 1550 && adb -s %cur_ip%:%cur_port% shell input tap %wd% %hg% && goto st
 
 if %inp%==60 echo Crazy keyboard starting... && set /p "msg=Enter msg: " & adb -s %cur_ip%:%cur_port% shell input text %msg% && goto st
 
@@ -123,3 +123,6 @@ set "s_pth=%l_pth%"
 
 set "new_port=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%"
 goto end_sett
+
+
+pause && goto sett
