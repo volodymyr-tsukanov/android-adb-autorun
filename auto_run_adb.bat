@@ -5,7 +5,8 @@ echo %help%
 
 
 :sett
-if exist tmp/sett.tmp set /p "t=Load from save?[y/ ]: " && goto load
+set /p "t=Load from save?[y/ ]: " && set /p "l_pth=Enter load path: " && goto load
+set /p "s_pth=Enter save path: "
 set /p "cur_ip=Enter target ip: "
 if [%cur_ip%]==[] echo Ip required! && goto sett
 set /p "cur_port=Enter target port: "
@@ -30,10 +31,12 @@ goto save
 set /p "inp=Enter mode: "
 set "r=%RANDOM%"
 
+if %inp%==000 goto save
+
 
 if %inp%==0 echo %help% && goto st
 
-if %inp%==01 set cur_ip & set cur_port & set new_port & set o_app & set c_app & set i_app & set sr_l & set msg & set vd & goto st
+if %inp%==01 set s_pth & set cur_ip & set cur_port & set new_port & set o_app & set c_app & set i_app & set sr_l & set msg & set vd & goto st
 
 if %inp%==02 goto sett
 
@@ -108,12 +111,15 @@ pause && goto st
 
 
 :save
-echo %cur_ip%;%cur_port%;%o_app%;%c_app%;%i_app%;%sr_l%;%vd%;%msg% > tmp/sett.tmp && echo Data saved
+if [%s_pth%]==[] echo Enter save path firstly && goto sett
+echo %cur_ip%;%cur_port%;%o_app%;%c_app%;%i_app%;%sr_l%;%vd%;%msg% > %s_pth% && echo Data saved
 goto st
 
 
 :load
 ::ij
-for /f "tokens=1-9 delims=;" %%a in (tmp/sett.tmp) do set "cur_ip=%%a" & set "cur_port=%%b" & set "o_app=%%c" & set "c_app=%%d" & set "i_app=%%e" & set "sr_l=%%f" & set "vd=%%g" & set "msg=%%h"
+for /f "tokens=1-9 delims=;" %%a in (%l_pth%) do set "cur_ip=%%a" & set "cur_port=%%b" & set "o_app=%%c" & set "c_app=%%d" & set "i_app=%%e" & set "sr_l=%%f" & set "vd=%%g" & set "msg=%%h"
+set "s_pth=%l_pth%"
+
 set "new_port=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%"
 goto end_sett
