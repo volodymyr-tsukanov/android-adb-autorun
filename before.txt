@@ -1,0 +1,3 @@
+Android Debug Bridge autorun installer
+ADB platform tools version r34.0.5
+'Next' to continue...
