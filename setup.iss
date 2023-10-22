@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ADB autorun"
-#define MyAppVersion "1.7"
+#define MyAppVersion "1.8"
 #define MyAppPublisher "volodymyr-tsukanov"
-#define MyAppURL "https://github.com/volodymyr-tsukanov/android-adb-autorun/"
-#define MyAppExeName "auto_run_adb.bat"
+#define MyAppURL "https://github.com/volodymyr-tsukanov/adb-autorun/"
+#define MyAppExeName "adb autorun.bat"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -36,7 +36,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "res\auto_run_adb.bat"; DestDir: "{app}"; Flags: ignoreversion
+Source: "adb autorun.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "res\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
