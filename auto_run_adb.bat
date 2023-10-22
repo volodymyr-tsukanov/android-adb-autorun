@@ -1,5 +1,6 @@
 @echo off
 
+
 set "help=Modes: [0-help 0.2-additional help 01-view settings 02-change settings]  [1-first start 2-wireless adb connect(bruteforce) 10-show devices 11-connect 12-disconnect current 13-disconnect all 14-change port 14.2-update new port]  [21-screenshoot 22-screenrecord]  [30-app list 31-open app 32-close app 33-close all 34-install apk 35-delete app]  [40-battery check]  [51-unlock 52-lock 53-home 54-back 55-volume- 56 volume+ 57-mute 58-pause 59-crazy input 59.2-fast crazy input 60-crazy keyboard 61-Android action View]  [8-clear 9-exit 99-full exit]"
 echo %help%
 
@@ -12,7 +13,6 @@ set /p "s_pth=Enter save path: "
 set /p "cur_ip=Enter target ip: "
 if [%cur_ip%]==[] echo Ip required! && goto sett
 set /p "cur_port=Enter target port: "
-if [%cur_port%]==[] set cur_port=7777
 set /p "new_port=Enter new port: "
 if [%new_port%]==[] set "new_port=%RANDOM:~0,1%%RANDOM:~-1%%RANDOM:~-1%%RANDOM:~-1%"
 :end_sett
@@ -44,9 +44,9 @@ if %inp%==2 echo Wireless pairing %cur_ip% by bruteforce && ipconfig && goto wac
 
 if %inp%==10 adb devices && goto st
 
-if %inp%==11 echo Connecting to %cur_ip%... && adb connect %cur_ip%:%cur_port% && goto st
+if %inp%==11 echo Connecting to %cur_ip%... && if [%cur_port%]==[] (adb connect %cur_ip%) else (adb connect %cur_ip%:%cur_port%) && goto st
 
-if %inp%==12 echo Disconnecting %cur_ip%... && adb disconnect %cur_ip%:%cur_port% && goto st
+if %inp%==12 echo Disconnecting %cur_ip%... && if [%cur_port%]==[] (adb disconnect %cur_ip%) else (adb disconnect %cur_ip%:%cur_port%) && goto st
 
 if %inp%==13 echo Disconnecting all... && adb disconnect && goto st
 
@@ -112,7 +112,6 @@ pause && goto st
 
 
 ::methods
-
 :wac
 start "Wireless port bruteforce" cmd /c "for /l %%n in (0, 2048, 65536) do telnet %cur_ip% %%n"
 echo Wait for bruteforce && pause && goto st
