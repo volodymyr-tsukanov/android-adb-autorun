@@ -1,6 +1,9 @@
 # android-adb-autorun
-Batch; Android; ADB platform tools</br>
-Install [ADB platform tools](https://developer.android.com/tools/releases/platform-tools) and put **auto_run_adb.bat** next to _adb.exe_</br></br>
+Batch; Android; ADB platform tools<br>
+Install [ADB platform tools](https://developer.android.com/tools/releases/platform-tools) and put **auto_run_adb.bat** next to _adb.exe_<br><br>
+
+
+![Paused](https://img.shields.io/badge/status-Paused%20%E2%8F%B8%EF%B8%8F-ADD8E6?style=for-the-badge&logo=github) <br>
 
 
 Shield: [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
